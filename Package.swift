@@ -17,7 +17,7 @@ let package = Package(
         // .package(url: /* package url */, from: "1.0.0"),
         .package(name: "Realm", url: "https://github.com/realm/realm-cocoa.git", from: "10.5.1"),
         .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.4.1")),
-        .package(path: "../Core")
+        .package(name: "Core", url: "https://github.com/zakywisnu/TMDb_Swift-core-package.git", from: "1.0.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
