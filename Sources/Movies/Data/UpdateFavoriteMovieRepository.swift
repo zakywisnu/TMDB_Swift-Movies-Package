@@ -14,7 +14,7 @@ public struct UpdateFavoriteMovieRepository<
 where
     MovieLocalDataSource.Request == Int,
     MovieLocalDataSource.Response == MovieEntity,
-    Transformer.Request == String,
+    Transformer.Request == Int,
     Transformer.Response == MovieResponse,
     Transformer.Entity == MovieEntity,
     Transformer.Domain == MovieModel {

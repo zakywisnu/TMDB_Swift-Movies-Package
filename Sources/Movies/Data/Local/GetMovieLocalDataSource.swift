@@ -25,7 +25,6 @@ public struct GetMovieLocalDataSource: LocalDataSource {
     
     public func list(request: Int?) -> AnyPublisher<[MovieEntity], Error> {
         return Future<[MovieEntity], Error> { completion in
-            guard let request = request else { return completion(.failure(DatabaseError.requestFailed))}
             
             let movies: Results<MovieEntity> = {
                 _realm.objects(MovieEntity.self)
