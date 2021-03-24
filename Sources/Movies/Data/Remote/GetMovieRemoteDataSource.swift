@@ -24,7 +24,7 @@ public struct GetMovieRemoteDataSource: DataSource {
         return Future<MovieResponse, Error> { completion in
             guard let request = request else { return completion(.failure(URLError.invalidRequest))}
             
-            if let url = URL(string: _endpoint + String(request)) {
+            if let url = URL(string: _endpoint) {
                 AF.request(url)
                     .validate()
                     .responseDecodable(of: MovieResponse.self) { response in
