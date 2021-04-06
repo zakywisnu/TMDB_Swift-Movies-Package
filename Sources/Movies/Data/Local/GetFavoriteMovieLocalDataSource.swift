@@ -5,10 +5,10 @@
 //  Created by Ahmad Zaky on 19/02/21.
 //
 
-import Foundation
 import Core
 import Combine
 import RealmSwift
+import Cleanse
 
 public struct GetFavoriteLocalDataSource: LocalDataSource {
     
@@ -59,5 +59,12 @@ public struct GetFavoriteLocalDataSource: LocalDataSource {
     public func update(id: Int, entity: MovieEntity) -> AnyPublisher<Bool, Error> {
         fatalError()
     }
-    
+}
+
+extension GetFavoriteLocalDataSource {
+    struct Module: Cleanse.Module {
+        static func configure(binder: Binder<Singleton>) {
+            binder.bind(GetFavoriteLocalDataSource.self).to(factory: GetFavoriteLocalDataSource.init)
+        }
+    }
 }

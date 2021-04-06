@@ -5,10 +5,11 @@
 //  Created by Ahmad Zaky on 19/02/21.
 //
 
-import Foundation
+import Cleanse
 import Core
 import Combine
 import Alamofire
+import Foundation
 
 public struct GetMovieRemoteDataSource: DataSource {
     public typealias Request = Int
@@ -37,5 +38,13 @@ public struct GetMovieRemoteDataSource: DataSource {
                     }
             }
         }.eraseToAnyPublisher()
+    }
+}
+
+extension GetMovieRemoteDataSource {
+    struct Module: Cleanse.Module {
+        static func configure(binder: Binder<Singleton>) {
+            binder.bind(GetMovieRemoteDataSource.self).to(factory: GetMovieRemoteDataSource.init)
+        }
     }
 }

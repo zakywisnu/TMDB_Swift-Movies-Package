@@ -7,6 +7,7 @@
 
 import Core
 import Combine
+import Cleanse
 
 public struct GetFavoriteMovieRepository<
     MovieLocalDataSource: LocalDataSource,
@@ -39,4 +40,11 @@ where
             .eraseToAnyPublisher()
     }
     
+}
+public extension GetFavoriteMovieRepository {
+    struct Module: Cleanse.Module {
+        public static func configure(binder: Binder<Singleton>) {
+            binder.bind(GetFavoriteMovieRepository.self).to(factory: GetFavoriteMovieRepository.init)
+        }
+    }
 }

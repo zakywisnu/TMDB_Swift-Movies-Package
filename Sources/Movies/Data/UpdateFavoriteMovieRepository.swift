@@ -7,6 +7,7 @@
 
 import Core
 import Combine
+import Cleanse
 
 public struct UpdateFavoriteMovieRepository<
     MovieLocalDataSource: LocalDataSource,
@@ -37,5 +38,14 @@ where
         return _localeDataSource.get(id: request ?? 0)
             .map{_mapper.transformEntityToDomain(entity: $0)}
             .eraseToAnyPublisher()
+    }
+}
+
+extension UpdateFavoriteMovieRepository {
+    struct Module: Cleanse.Module {
+        static func configure(binder: Binder<Singleton>) {
+            binder.include(module: GetFavoriteLocalDataSource.Module.self)
+            binder.bind(UpdateFavoriteMovieRepository.self).to(factory: UpdateFavoriteMovieRepository.init)
+        }
     }
 }

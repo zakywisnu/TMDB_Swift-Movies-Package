@@ -7,6 +7,8 @@
 
 import Core
 import Combine
+import Cleanse
+import RealmSwift
 
 public struct GetListMovieRepository<
     MovieLocalDataSource: LocalDataSource,
@@ -58,5 +60,15 @@ where
                 }
             }.eraseToAnyPublisher()
     }
-    
+}
+
+extension GetListMovieRepository {
+    struct Module: Cleanse.Module {
+        static func configure(binder: Binder<Singleton>) {
+            binder.include(module: GetListMovieRemoteDataSource.Module.self)
+            binder.include(module: GetMovieLocalDataSource.Module.self)
+            binder.include(module: MovieListTransformer.Module.self)
+            binder.bind(GetListMovieRepository.self).to(factory: GetListMovieRepository.init)
+        }
+    }
 }

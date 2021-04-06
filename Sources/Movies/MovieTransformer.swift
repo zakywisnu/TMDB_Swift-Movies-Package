@@ -8,6 +8,7 @@
 import Foundation
 import Core
 import RealmSwift
+import Cleanse
 
 public struct MovieTransformer: Mapper{
     
@@ -45,5 +46,13 @@ public struct MovieTransformer: Mapper{
             favorite: entity.favorite
         )
     }
-
 }
+
+public extension MovieTransformer {
+    struct Module: Cleanse.Module {
+        public static func configure(binder: Binder<Singleton>) {
+            binder.bind(MovieTransformer.self).to(factory: MovieTransformer.init)
+        }
+    }
+}
+

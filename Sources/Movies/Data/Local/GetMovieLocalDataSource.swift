@@ -5,10 +5,10 @@
 //  Created by Ahmad Zaky on 19/02/21.
 //
 
-import Foundation
 import Core
 import Combine
 import RealmSwift
+import Cleanse
 
 public struct GetMovieLocalDataSource: LocalDataSource {
     
@@ -92,6 +92,13 @@ public struct GetMovieLocalDataSource: LocalDataSource {
             }
         }.eraseToAnyPublisher()
     }
-    
-    
+}
+
+extension GetMovieLocalDataSource {
+    struct Module: Cleanse.Module {
+        static func configure(binder: Binder<Singleton>) {
+            binder.include(module: Realm.Module.self)
+            binder.bind(GetMovieLocalDataSource.self).to(factory: GetMovieLocalDataSource.init)
+        }
+    }
 }

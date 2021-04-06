@@ -7,6 +7,7 @@
 
 import Core
 import Combine
+import Cleanse
 
 public struct GetDetailMovieRepository<MovieLocalDataSource: LocalDataSource,
                                        RemoteDataSource: DataSource,
@@ -47,3 +48,13 @@ where
     }
 }
 
+public extension GetDetailMovieRepository {
+    struct Module: Cleanse.Module {
+        public static func configure(binder: Binder<Singleton>) {
+            binder.include(module: GetMovieLocalDataSource.Module.self)
+            binder.include(module: GetMovieRemoteDataSource.Module.self)
+            binder.include(module: MovieTransformer.Module.self)
+            binder.bind(GetDetailMovieRepository.self).to(factory: GetDetailMovieRepository.init)
+        }
+    }
+}

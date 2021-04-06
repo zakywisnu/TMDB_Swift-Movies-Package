@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "Cleanse",
+        "repositoryURL": "https://github.com/square/Cleanse",
+        "state": {
+          "branch": null,
+          "revision": "c854787f83d99527587b5387f04ccd0030e6133a",
+          "version": "4.2.6"
+        }
+      },
+      {
         "package": "Realm",
         "repositoryURL": "https://github.com/realm/realm-cocoa.git",
         "state": {
@@ -33,8 +42,8 @@
         "repositoryURL": "https://github.com/zakywisnu/TMDb_Swift-core-package.git",
         "state": {
           "branch": null,
-          "revision": "71755c09e8faebbebd4d60f648647d1e15efe4e4",
-          "version": "1.0.0"
+          "revision": "a7c9e03fcf51769bc9ea40c074cb77656e006c80",
+          "version": "1.2.2"
         }
       }
     ]

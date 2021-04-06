@@ -9,6 +9,7 @@ import Foundation
 import Core
 import Combine
 import Alamofire
+import Cleanse
 
 public struct GetListMovieRemoteDataSource: DataSource {
     public typealias Request = Int
@@ -36,5 +37,11 @@ public struct GetListMovieRemoteDataSource: DataSource {
             }
         }.eraseToAnyPublisher()
     }
-    
+}
+extension GetListMovieRemoteDataSource {
+    struct Module: Cleanse.Module {
+        static func configure(binder: Binder<Singleton>) {
+            binder.bind(GetListMovieRemoteDataSource.self).to(factory: GetListMovieRemoteDataSource.init)
+        }
+    }
 }
