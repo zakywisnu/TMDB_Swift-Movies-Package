@@ -44,9 +44,9 @@ public extension Presenter {
                             GetFavoriteLocalDataSource,
                             MovieTransformer>.Module.self)
             
-            binder.bind(MovieDetailPresenter.self).to{ (detailRepository: Provider<GetDetailMovieRepository<GetMovieLocalDataSource, GetMovieRemoteDataSource, MovieTransformer>>) ->
+            binder.bindFactory(MovieDetailPresenter.self).with(MovieDetailPresenter.AssistedFeed.self).to { (detailRepository: Provider<GetDetailMovieRepository<GetMovieLocalDataSource, GetMovieRemoteDataSource, MovieTransformer>>, seed: Assisted<MovieModel>) ->
                 MovieDetailPresenter in
-                return MovieDetailPresenter(useCase: MovieDetailInteractor(repository: detailRepository.get()))
+                return MovieDetailPresenter(useCase: MovieDetailInteractor(repository: detailRepository.get()), request: seed.get().id)
             }
             
             binder.bind(UpdateFavoriteMoviePresenter.self).to{ (updateRepository: Provider<UpdateFavoriteMovieRepository<GetFavoriteLocalDataSource, MovieTransformer>>) ->

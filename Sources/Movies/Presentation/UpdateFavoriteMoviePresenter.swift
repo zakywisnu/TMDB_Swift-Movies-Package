@@ -7,4 +7,4 @@
 
 import Core
 
-public typealias UpdateFavoriteMoviePresenter = Presenter<Int, MovieModel, UpdateFavoriteInteractor>
+public typealias UpdateFavoriteMoviePresenter = UpdateFavoritePresenter<Int, MovieModel, UpdateFavoriteInteractor>

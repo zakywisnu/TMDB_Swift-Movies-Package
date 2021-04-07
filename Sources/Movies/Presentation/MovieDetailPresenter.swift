@@ -6,5 +6,13 @@
 //
 
 import Core
+import Cleanse
 
 public typealias MovieDetailPresenter = Presenter<Int, MovieModel, MovieDetailInteractor>
+
+public extension MovieDetailPresenter {
+    struct AssistedFeed: AssistedFactory {
+        public typealias Seed = MovieModel
+        public typealias Element = MovieDetailPresenter
+    }
+}
