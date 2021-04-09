@@ -7,4 +7,6 @@
 
 import Core
 
-public typealias MovieDetailInteractor = Interactor<Int, MovieModel, GetDetailMovieRepository<GetMovieLocalDataSource, GetMovieRemoteDataSource, MovieTransformer>>
+public typealias MovieDetailInteractor = Interactor<Int, MovieModel, GetDetailMovieRepository<GetMovieLocalDataSource,
+//                                                                                              GetMovieRemoteDataSource,
+                                                                                              MovieTransformer>>

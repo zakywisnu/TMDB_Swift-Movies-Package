@@ -38,13 +38,13 @@ public extension Presenter {
         public static func configure(binder: Binder<Singleton>) {
             binder.include(module: GetDetailMovieRepository<
                             GetMovieLocalDataSource,
-                            GetMovieRemoteDataSource,
+//                            GetMovieRemoteDataSource,
                             MovieTransformer>.Module.self)
             binder.include(module: UpdateFavoriteMovieRepository<
                             GetFavoriteLocalDataSource,
                             MovieTransformer>.Module.self)
             
-            binder.bindFactory(MovieDetailPresenter.self).with(MovieDetailPresenter.AssistedFeed.self).to { (detailRepository: Provider<GetDetailMovieRepository<GetMovieLocalDataSource, GetMovieRemoteDataSource, MovieTransformer>>, seed: Assisted<MovieModel>) ->
+            binder.bindFactory(MovieDetailPresenter.self).with(MovieDetailPresenter.AssistedFeed.self).to { (detailRepository: Provider<GetDetailMovieRepository<GetMovieLocalDataSource, MovieTransformer>>, seed: Assisted<MovieModel>) ->
                 MovieDetailPresenter in
                 return MovieDetailPresenter(useCase: MovieDetailInteractor(repository: detailRepository.get()), request: seed.get().id)
             }

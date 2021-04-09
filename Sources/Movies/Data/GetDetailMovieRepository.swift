@@ -10,13 +10,13 @@ import Combine
 import Cleanse
 
 public struct GetDetailMovieRepository<MovieLocalDataSource: LocalDataSource,
-                                       RemoteDataSource: DataSource,
+//                                       RemoteDataSource: DataSource,
                                        Transformer: Mapper>: Repository
 where
     MovieLocalDataSource.Request == Int,
     MovieLocalDataSource.Response == MovieEntity,
-    RemoteDataSource.Request == Int,
-    RemoteDataSource.Response == MovieResponse,
+//    RemoteDataSource.Request == Int,
+//    RemoteDataSource.Response == MovieResponse,
     Transformer.Request == Int,
     Transformer.Response == MovieResponse,
     Transformer.Entity == MovieEntity,
@@ -26,16 +26,16 @@ where
     public typealias Response = MovieModel
     
     private let _localDataSource: MovieLocalDataSource
-    private let _remoteDataSource: RemoteDataSource
+//    private let _remoteDataSource: RemoteDataSource
     private let _mapper: Transformer
     
     public init(
         localDataSource: MovieLocalDataSource,
-        remoteDataSource: RemoteDataSource,
+//        remoteDataSource: RemoteDataSource,
         mapper: Transformer
     ) {
         _localDataSource = localDataSource
-        _remoteDataSource = remoteDataSource
+//        _remoteDataSource = remoteDataSource
         _mapper = mapper
     }
     
@@ -52,7 +52,7 @@ public extension GetDetailMovieRepository {
     struct Module: Cleanse.Module {
         public static func configure(binder: Binder<Singleton>) {
             binder.include(module: GetMovieLocalDataSource.Module.self)
-            binder.include(module: GetMovieRemoteDataSource.Module.self)
+//            binder.include(module: GetMovieRemoteDataSource.Module.self)
             binder.include(module: MovieTransformer.Module.self)
             binder.bind(GetDetailMovieRepository.self).to(factory: GetDetailMovieRepository.init)
         }
