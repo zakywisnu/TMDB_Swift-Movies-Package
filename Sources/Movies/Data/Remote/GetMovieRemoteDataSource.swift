@@ -17,10 +17,9 @@ public struct GetMovieRemoteDataSource: DataSource {
     
     
     public func execute(request: Request?) -> AnyPublisher<Response, Error> {
+        guard let request = request else { fatalError("an id is Needed")}
         return Future<MovieResponse, Error> { completion in
-            guard let _request = request else { return completion(.failure(URLError.invalidRequest))}
-            
-            if let url = URL(string: "\(API.baseUrl)3/movie/\(_request)?api_key=c3141d1a29379bd03dceb243cd2a5942") {
+            if let url = URL(string: "\(API.baseUrl)3/movie/\(request)?api_key=c3141d1a29379bd03dceb243cd2a5942") {
                 AF.request(url)
                     .validate()
                     .responseDecodable(of: MovieResponse.self) { response in
