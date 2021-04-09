@@ -14,16 +14,13 @@ import Cleanse
 public struct GetListMovieRemoteDataSource: DataSource {
     public typealias Request = Int
     public typealias Response = [MovieResponse]
-    private let _endpoint: String
+   
     
-    public init(endpoint: String){
-        _endpoint = endpoint
-    }
     
     public func execute(request: Request?) -> AnyPublisher<Response, Error> {
         return Future<[MovieResponse], Error> { completion in
             
-            if let url = URL(string: _endpoint) {
+            if let url = URL(string: "\(API.baseUrl)3/movie/popular?api_key=c3141d1a29379bd03dceb243cd2a5942") {
                 AF.request(url)
                     .validate()
                     .responseDecodable(of: MovieListResponse.self) { response in
